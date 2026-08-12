@@ -87,6 +87,13 @@ def account_to_handle(account: str) -> str | None:
     return normalize_handle(value)
 
 
+def is_address_handle(value: str) -> bool:
+    if "@" in value:
+        local, separator, domain = value.partition("@")
+        return bool(local and separator and domain and " " not in value)
+    return re.fullmatch(r"\+?\d{7,15}", value) is not None
+
+
 def apple_timestamp(value: int | float | None) -> str | None:
     if value is None:
         return None
@@ -344,18 +351,65 @@ class ChatDatabase:
     def self_handles(self) -> frozenset[str]:
         try:
             with closing(self.connect()) as connection:
-                rows = connection.execute(
+                account_rows = connection.execute(
                     """
                     SELECT DISTINCT account
                     FROM message
-                    WHERE is_from_me = 1 AND account IS NOT NULL
+                    WHERE is_from_me = 1
+                      AND service = 'iMessage'
+                      AND account IS NOT NULL
                     """
-                )
-                return frozenset(
+                ).fetchall()
+                accounts = frozenset(
                     handle
-                    for row in rows
+                    for row in account_rows
                     if (handle := account_to_handle(row["account"])) is not None
                 )
+
+                message_columns = {
+                    row["name"]
+                    for row in connection.execute("PRAGMA table_info(message)")
+                }
+                if "destination_caller_id" not in message_columns:
+                    return accounts
+
+                # This field is the local iMessage route, not the remote sender.
+                # Require it on both directions under a trusted account so a
+                # one-sided or spoofable transport value cannot become "self".
+                destination_rows = connection.execute(
+                    """
+                    WITH trusted_accounts AS (
+                        SELECT DISTINCT account
+                        FROM message
+                        WHERE is_from_me = 1
+                          AND service = 'iMessage'
+                          AND account IS NOT NULL
+                    )
+                    SELECT
+                        m.destination_caller_id,
+                        MAX(CASE WHEN m.is_from_me = 1 THEN 1 ELSE 0 END)
+                            AS has_outgoing,
+                        MAX(CASE WHEN m.is_from_me = 0 THEN 1 ELSE 0 END)
+                            AS has_incoming
+                    FROM message AS m
+                    JOIN trusted_accounts AS trusted ON trusted.account = m.account
+                    WHERE m.service = 'iMessage'
+                      AND m.destination_caller_id IS NOT NULL
+                      AND m.destination_caller_id != ''
+                    GROUP BY m.destination_caller_id
+                    HAVING has_outgoing = 1 AND has_incoming = 1
+                    """
+                ).fetchall()
+                confirmed_destinations = {
+                    handle
+                    for row in destination_rows
+                    if (
+                        handle := account_to_handle(row["destination_caller_id"])
+                    )
+                    is not None
+                    and is_address_handle(handle)
+                }
+                return accounts | frozenset(confirmed_destinations)
         except sqlite3.Error as error:
             raise ChatDatabaseError(f"Unable to identify local iMessage accounts: {error}") from error
 

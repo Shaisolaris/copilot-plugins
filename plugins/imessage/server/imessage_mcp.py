@@ -8,6 +8,7 @@ c54b5608d9be1910de9a5b91c2d15bf6673b9c35.
 
 from __future__ import annotations
 
+import utils.session
 import argparse
 import json
 import platform

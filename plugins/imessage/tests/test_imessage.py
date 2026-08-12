@@ -20,6 +20,7 @@ from imessage import (  # noqa: E402
     GroupAccess,
     IMessageService,
     SendError,
+    is_address_handle,
     parse_attributed_body,
 )
 from imessage_mcp import MCPServer  # noqa: E402
@@ -52,7 +53,8 @@ def create_database(path: Path) -> None:
             account TEXT,
             handle_id INTEGER,
             service TEXT,
-            cache_has_attachments INTEGER DEFAULT 0
+            cache_has_attachments INTEGER DEFAULT 0,
+            destination_caller_id TEXT
         );
         CREATE TABLE chat_handle_join (chat_id INTEGER, handle_id INTEGER);
         CREATE TABLE chat_message_join (chat_id INTEGER, message_id INTEGER);
@@ -77,10 +79,10 @@ def create_database(path: Path) -> None:
             (4, 4);
 
         INSERT INTO message VALUES
-            (1, 'm1', 'self note', NULL, 1000000000, 1, 'E:me@example.com', 1, 'iMessage', 0),
-            (2, 'm2', 'hello from friend', NULL, 2000000000, 0, NULL, 2, 'iMessage', 0),
-            (3, 'm3', NULL, X'4E5341747472696275746564537472696E674E53537472696E67019484012B0568656C6C6F', 3000000000, 0, NULL, 3, 'iMessage', 0),
-            (4, 'm4', 'spoofed self', NULL, 4000000000, 0, NULL, 4, 'SMS', 0);
+            (1, 'm1', 'self note', NULL, 1000000000, 1, 'E:me@example.com', 1, 'iMessage', 0, NULL),
+            (2, 'm2', 'hello from friend', NULL, 2000000000, 0, NULL, 2, 'iMessage', 0, NULL),
+            (3, 'm3', NULL, X'4E5341747472696275746564537472696E674E53537472696E67019484012B0568656C6C6F', 3000000000, 0, NULL, 3, 'iMessage', 0, NULL),
+            (4, 'm4', 'spoofed self', NULL, 4000000000, 0, NULL, 4, 'SMS', 0, NULL);
 
         INSERT INTO chat_message_join VALUES (1, 1), (2, 2), (3, 3), (4, 4);
         """
@@ -145,6 +147,76 @@ class IMessageTestCase(unittest.TestCase):
             "iMessage;-;alias@example.com",
             {chat["chat_id"] for chat in self.service.list_chats(20)},
         )
+
+    def test_confirmed_imessage_destination_alias_identifies_self_chat(self) -> None:
+        with sqlite3.connect(self.database_path) as connection:
+            connection.execute(
+                "INSERT INTO handle VALUES (5, '+15550009999', 'iMessage')"
+            )
+            connection.execute(
+                """
+                INSERT INTO chat VALUES
+                    (5, 'iMessage;-;+15550009999', '+15550009999', '',
+                     45, 'iMessage')
+                """
+            )
+            connection.execute("INSERT INTO chat_handle_join VALUES (5, 5)")
+            connection.executemany(
+                """
+                INSERT INTO message
+                    (ROWID, guid, text, date, is_from_me, account, handle_id,
+                     service, destination_caller_id)
+                VALUES (?, ?, 'fixture', ?, ?, 'E:me@example.com', ?,
+                        'iMessage', ?)
+                """,
+                [
+                    (5, "alias-incoming", 5_000_000_000, 0, 2, "+15550009999"),
+                    (6, "alias-outgoing", 6_000_000_000, 1, 2, "+15550009999"),
+                    (7, "self-outgoing", 7_000_000_000, 1, 5, "+15550009999"),
+                    (8, "unconfirmed", 8_000_000_000, 1, 2, "+15550008888"),
+                ],
+            )
+            connection.executemany(
+                "INSERT INTO chat_message_join VALUES (?, ?)",
+                [(2, 5), (2, 6), (5, 7), (2, 8)],
+            )
+
+        detected = self.database.self_handles()
+        self.assertIn("+15550009999", detected)
+        self.assertNotIn("+15550008888", detected)
+        chats = {chat["chat_id"] for chat in self.service.list_chats(20)}
+        self.assertIn("iMessage;-;+15550009999", chats)
+        self.assertNotIn("iMessage;-;+15551112222", chats)
+
+    def test_self_detection_ignores_sms_destination_alias(self) -> None:
+        with sqlite3.connect(self.database_path) as connection:
+            connection.executemany(
+                """
+                INSERT INTO message
+                    (ROWID, guid, text, date, is_from_me, account, handle_id,
+                     service, destination_caller_id)
+                VALUES (?, ?, 'fixture', ?, ?, 'E:me@example.com', 4,
+                        'SMS', '+15550007777')
+                """,
+                [
+                    (5, "sms-incoming", 5_000_000_000, 0),
+                    (6, "sms-outgoing", 6_000_000_000, 1),
+                ],
+            )
+        self.assertNotIn("+15550007777", self.database.self_handles())
+
+    def test_self_detection_supports_legacy_schema_without_destination(self) -> None:
+        with sqlite3.connect(self.database_path) as connection:
+            connection.execute(
+                "ALTER TABLE message DROP COLUMN destination_caller_id"
+            )
+        self.assertEqual(frozenset({"me@example.com"}), self.database.self_handles())
+
+    def test_address_handle_validation_rejects_short_codes(self) -> None:
+        self.assertTrue(is_address_handle("+15550009999"))
+        self.assertTrue(is_address_handle("owner@example.com"))
+        self.assertFalse(is_address_handle("12345"))
+        self.assertFalse(is_address_handle("not-an-address"))
 
     def test_direct_and_group_access_require_explicit_exact_allowlists(self) -> None:
         group = GroupAccess(

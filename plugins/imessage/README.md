@@ -41,8 +41,10 @@ the terminal or application running Copilot CLI to control **Messages**.
 ## Secure-by-default access
 
 - Only macOS is supported.
-- Self handles are detected from outbound `chat.db` account records; self-chats
-  are allowed.
+- Self handles are detected from authenticated iMessage account records and
+  local destination identities observed on both incoming and outgoing
+  iMessages; self-chats are allowed. Message recipients and SMS/RCS rows never
+  contribute self identities.
 - Every other direct sender is denied until explicitly allowlisted.
 - Every group is denied until its chat GUID and exact participant snapshot are
   allowed. If membership changes, access closes until the group is allowed
