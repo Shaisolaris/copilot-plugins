@@ -427,8 +427,13 @@
       "keywords": [
         "dataverse",
         "mcp",
+        "mcp-server",
         "power-platform",
-        "dynamics-365"
+        "power-apps",
+        "dynamics-365",
+        "dynamics-crm",
+        "finance-operations",
+        "xpp"
       ],
       "license": "MIT"
     }
