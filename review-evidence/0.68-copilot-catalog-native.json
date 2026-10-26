@@ -1,0 +1,82 @@
+{
+  "recordedAtUTC": "2026-10-26T22:17:09.937757+00:00",
+  "qaCommit": "eb3db8bc0c924a1cdb8cd3e93eaec411c5ccb7f7",
+  "runnerSHA256": "b78d95b806ed4c8e4e452285570cfd92a4f8eaf9c97fd8e7a6f864868c0c2c0f",
+  "result": {
+    "candidateCatalog": "565ddab4370f6644d8c67978bad8615ad8e7f156",
+    "source": {
+      "source": "github",
+      "repo": "Shaisolaris/solaris-dev-shop-plugins",
+      "path": "copilot/plugin",
+      "sha": "0ce43cd9a550a033a40b4e1f429a6c3c138802c2"
+    },
+    "version": "0.68.0",
+    "host": "CopilotCLI1.0.102",
+    "matchingFilesAndModes": 1980,
+    "canonicalFiles": 1201,
+    "nativeWorkflows": 62,
+    "catalogRejectionControls": [
+      "duplicate product entry",
+      "unversioned public source",
+      "changed existing catalog entry"
+    ],
+    "actualHelperOutcomes": {
+      "context_workflows": 62,
+      "actual_assignment": "solaris.code-reviewer",
+      "actual_sqlite_rows_restored": 2,
+      "neighbor_unchanged": true
+    },
+    "fixtureCatalogNameOnlyOverride": "solaris-catalog-qa",
+    "fixtureCatalogGitSHA": "b6fbf9862aa29fde57793c04894de5caa43a635a",
+    "catalogTransport": "publicGitHubBranchVerifiedAtExactSHA",
+    "fixtureBranch": "codex/solaris-068-catalog-fixture",
+    "fetchedFixtureSHA": "b6fbf9862aa29fde57793c04894de5caa43a635a",
+    "officialCatalogDefault": false,
+    "originalAwesomeRejectionOverturned": false,
+    "forceFlagUsed": false,
+    "modelCommandsIssued": 0,
+    "modelUsageMetered": false,
+    "ownerProfileAccess": false,
+    "upstreamApplicationSubmitted": false,
+    "publicMarketplaceAccepted": false,
+    "pass": true
+  },
+  "installedListProjection": {
+    "name": "solaris-dev-shop",
+    "marketplace": "solaris-catalog-qa",
+    "version": "0.68.0",
+    "enabled": true
+  },
+  "evidenceProvenance": "Root-executed local macOS native CLI and helper result. Raw logs retained privately with hashes below; not independently executed or publicly retrievable raw log evidence.",
+  "logsSHA256": {
+    "add-marketplace.stdout": "c8c189a66f8d040343c1ac0843df4bf3e4fb9c8b9dc65b6b2498213ada495b3e",
+    "install.stdout": "34f56cdb22903b53676eed1dbc5f79fafe9d744e004fd16605967cf55fa6dc7b",
+    "installed.stdout": "268ee79b8bcb3f0b3f73454cd576c4428c17c4b74d8766c176d2188e5f9f8610",
+    "skills.stdout": "b088ed1f817f752f939f40b0b1dd3ffd506cea9250d6463bdea026b7310180a1",
+    "version.stdout": "40de8ff52667844de33eee237034cd548c479fc1705bb6854e3b51ae85092c13",
+    "add-marketplace.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "installed.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "COPILOT-CATALOG-QA-068-RUN3.log": "53e5e538c907618a5a8466e0bc00d97d973411687f70f7fed244af601e5b851f"
+  },
+  "priorFailuresPreserved": [
+    {
+      "run": 1,
+      "result": "FAIL actual discovery; local-directory catalog pruned external registration",
+      "logSHA256": "4d605614562c5b158a5c85d777b9caa2a7e71c7db0b8b9c5fbd1891b5aa2c101"
+    },
+    {
+      "run": 2,
+      "result": "FAIL before install; raw SHA not accepted as git clone --branch ref",
+      "logSHA256": "2eee1da39c46e72b957645824a3af1b7f33ec522a99345f9cdd6adfb1d9d70bd"
+    }
+  ],
+  "limits": [
+    "Only declared normal management/discovery and real local helper outcomes were exercised; no model inference or live specialist quality certification.",
+    "Official alternate catalog is non-default. Actual upstream marketplace listing/curator acceptance is not verified.",
+    "awesome-copilot5393 remains rejected.",
+    "No provider application/upload, final release or ClawHub/Hermes clearance follows."
+  ]
+}
