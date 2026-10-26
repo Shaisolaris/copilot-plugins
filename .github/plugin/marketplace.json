@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "workiq",
-      "description": "Query Microsoft 365 data with natural language — emails, meetings, documents, Teams messages, and more.",
+      "description": "Query Microsoft 365 data with natural language \u2014 emails, meetings, documents, Teams messages, and more.",
       "version": "1.0.0",
       "author": {
         "name": "Microsoft",
@@ -37,7 +37,7 @@
     },
     {
       "name": "microsoft-365-agents-toolkit",
-      "description": "Toolkit for building Microsoft 365 Copilot declarative agents — scaffolding, JSON manifest development, and capability configuration.",
+      "description": "Toolkit for building Microsoft 365 Copilot declarative agents \u2014 scaffolding, JSON manifest development, and capability configuration.",
       "version": "1.1.0",
       "author": {
         "name": "Microsoft",
@@ -62,7 +62,7 @@
     },
     {
       "name": "workiq-productivity",
-      "description": "WorkIQ productivity skills powered by the local WorkIQ CLI — read-only insights across email, meetings, calendar, Teams, SharePoint, projects, and people.",
+      "description": "WorkIQ productivity skills powered by the local WorkIQ CLI \u2014 read-only insights across email, meetings, calendar, Teams, SharePoint, projects, and people.",
       "version": "1.0.0",
       "author": {
         "name": "Microsoft",
@@ -393,7 +393,7 @@
         "repo": "microsoft/power-platform-skills",
         "path": "plugins/power-automate"
       },
-      "description": "Build, edit, run, and debug Power Automate cloud flows via the FlowAgent MCP server — connection lifecycle, surgical edits, copy across environments, run management, and validated expressions.",
+      "description": "Build, edit, run, and debug Power Automate cloud flows via the FlowAgent MCP server \u2014 connection lifecycle, surgical edits, copy across environments, run management, and validated expressions.",
       "author": {
         "name": "Microsoft",
         "url": "https://www.microsoft.com"
@@ -434,6 +434,32 @@
         "xpp"
       ],
       "license": "MIT"
+    },
+    {
+      "name": "solaris-dev-shop",
+      "description": "Local project-delivery, recovery, reconciliation and evidence workflows, with 61 specialists and a Chief of Staff. Host tools, runtime prerequisites and permissions apply.",
+      "version": "0.68.0",
+      "author": {
+        "name": "Solaris Technologies",
+        "url": "https://solaristek.com"
+      },
+      "homepage": "https://github.com/Shaisolaris/solaris-dev-shop-plugins",
+      "repository": "https://github.com/Shaisolaris/solaris-dev-shop-plugins",
+      "license": "MIT",
+      "keywords": [
+        "developer-workflow",
+        "recovery",
+        "reconciliation",
+        "evidence",
+        "quality",
+        "skills"
+      ],
+      "source": {
+        "source": "github",
+        "repo": "Shaisolaris/solaris-dev-shop-plugins",
+        "path": "copilot/plugin",
+        "sha": "0ce43cd9a550a033a40b4e1f429a6c3c138802c2"
+      }
     }
   ]
 }
