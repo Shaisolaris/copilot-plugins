@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "purpose": "Read-only independent source/test-scope review for a complete MP08 entry in the separately documented default github/copilot-plugins catalog. No rejection is concealed or acceptance claimed.",
+  "baseline": "b0216dbc8f6f7ac1cfce85e925dfa5d5e423876a",
+  "catalogCandidate": "bcd0cf9ebd45e2fdca5adb8a582e5e6f3979bc5a",
+  "product": "0ce43cd9a550a033a40b4e1f429a6c3c138802c2",
+  "productPath": "copilot/plugin",
+  "core": "c7c9b395795f488dd3c48122ff916970438b67e6",
+  "runner": {
+    "path": "review-tools/verify_full_catalog_068.py",
+    "sha256": "1cee8b5a61989a4afc7c3ce6b99b959720ad250dc8db6a57edf6163e2fe7bd04"
+  },
+  "unchangedImportedHelper": {
+    "path": "tools/verify_copilot_layout.py",
+    "sourceCommit": "0ce43cd9a550a033a40b4e1f429a6c3c138802c2",
+    "sha256": "c6df557082a861b90c30a8ddd9e372f08a10532153d3145111654817f9563d2f"
+  },
+  "runtime": {
+    "officialHost": "CopilotCLI1.0.102",
+    "sha256": "506d032ae26882d40f1396e9b2080c6d9c3a5d5392404f9ef13eb7540efb55ec",
+    "python": "Existing3.12build environment; no new dependency installation"
+  },
+  "cases": [
+    "C01 onlyoneSolarisentry/fullimmutableGitHubsource/allothercatalogentriesandownerunchanged",
+    "C02 rejectduplicateproductentry",
+    "C03 rejectunpinnedsource",
+    "C04 rejectchangedexistingcatalogentry",
+    "C05 normalnativeCLIregisterprivatecatalogfixtureandinstallfullpublicGitref",
+    "C06 installed1980files/modesmatchexactapprovedGitarchive/all1201canonicalhashes",
+    "C07 all62uniquenativeworkflowsdiscovered",
+    "C08 unchanged62context/boundedcoordinator/actual2rowSQLiterestoreandneighborpreservation smoke",
+    "C09 productbytesstillunchangedaftermanagement/helpercommands"
+  ],
+  "fixture": "Full exact candidate Git archive with stock internal .claude-plugin symlink retained; ONLY catalog name changed to solaris-catalog-qa to avoid replacing the real default registration. This is a private resolution test, not public listing acceptance.",
+  "accessBoundary": {
+    "read": [
+      "Explicitpubliccatalog/product Git objects",
+      "DeclaredofficialCLI/Python/systemruntime/CA files"
+    ],
+    "write": [
+      "NEWownedworkdir with freshHOME/COPILOT_HOME/config/cache/fixture/logs/SQLitefixtures only"
+    ],
+    "network": [
+      "PublicGitHub source checkout at pinned productSHA and normalpubliccatalogmetadata the officialmanagementclientfetches; no credentials passed"
+    ],
+    "forbidden": [
+      "Ownerprofiles/keys/accounts",
+      "M1/M2bot source/config/runtime/activation",
+      "Any model/prompt/inference command",
+      "Forceinstall or securitypolicyoverride",
+      "Main/tag/release/upstreamcatalogwrites",
+      "Provider/worker/scheduler additions"
+    ]
+  },
+  "rollback": "Preserve failed/public request history. Discard unpublished candidate/privatefixture only; no live install or data rollback is in scope.",
+  "fullProductPreserved": {
+    "specialists": 61,
+    "coordinator": 1,
+    "workflows": 62,
+    "canonicalFiles": 1201,
+    "productFiles": 1980,
+    "newCapabilitiesClaimed": 0
+  },
+  "upstreamRejection": "github/awesome-copilot5393 remains rejected. Any alternate default-catalog inquiry/application must disclose that history and request a genuine independent fit decision, not repeat the rejected submission unchanged.",
+  "releaseHold": "Shared ClawHub requiredscan/admission and final rollout gates remain. No marketplace application/listing/approval claimed.",
+  "stage": "AWAITING_INDEPENDENT_SOURCE_TEST_SCOPE_REVIEW"
+}
