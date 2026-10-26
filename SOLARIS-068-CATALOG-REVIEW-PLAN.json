@@ -8,7 +8,7 @@
   "core": "c7c9b395795f488dd3c48122ff916970438b67e6",
   "runner": {
     "path": "review-tools/verify_full_catalog_068.py",
-    "sha256": "f0a5b621817e700b357c0c425cd54a557c096aa49ec12ca3a96129df60710c8d"
+    "sha256": "b78d95b806ed4c8e4e452285570cfd92a4f8eaf9c97fd8e7a6f864868c0c2c0f"
   },
   "unchangedImportedHelper": {
     "path": "tools/verify_copilot_layout.py",
@@ -25,7 +25,7 @@
     "C02 rejectduplicateproductentry",
     "C03 rejectunpinnedsource",
     "C04 rejectchangedexistingcatalogentry",
-    "C05 normalnativeCLIregisterexactpublicGitHubfixtureSHAandinstallfullproduct0ce;pluginlistmustshowexactenabled0.68SolarisQAentry",
+    "C05 normalnativeCLIregisterpublicGitHubfixturebranch;fetchedHEADmustexactlymatchfixtureSHAandcleancontentBEFOREinstall;pluginlistmustshowexactenabled0.68SolarisQAentry",
     "C06 installed1980files/modesmatchexactapprovedGitarchive/all1201canonicalhashes",
     "C07 all62uniquenativeworkflowsdiscovered",
     "C08 unchanged62context/boundedcoordinator/actual2rowSQLiterestoreandneighborpreservation smoke",
@@ -35,7 +35,7 @@
     "repo": "Shaisolaris/copilot-plugins",
     "sha": "b6fbf9862aa29fde57793c04894de5caa43a635a",
     "onlyDifference": "Catalog name solaris-catalog-qa; candidate source and all stock files/modes/symlink remain unchanged",
-    "transport": "Documented normal plugin marketplace add owner/repo#SHA",
+    "transport": "Normal plugin marketplace add owner/repo#branch; assert fetched repository HEAD exactly fixture SHA and clean tree BEFORE install; 1.0.102 cannot git-clone --branch a raw SHA",
     "isUpstreamMarketplaceListing": false
   },
   "accessBoundary": {
@@ -77,5 +77,11 @@
     "observation": "Local-directory catalog install printed 62 skills, but plugin list omitted Solaris and skill list exposed no Solaris workflows. Client log pruned cached external entry to live local mode. Product cache HEAD did match0ce; source SHA was honored.",
     "fix": "Use documented public GitHub catalog fixture transport. Preserve all byte/mode/discovery/recovery assertions; no cache-as-install or force override."
   },
-  "officialCatalogDefault": false
+  "officialCatalogDefault": false,
+  "priorFailure2": {
+    "run": "../copilot-catalog-qa-068-run2",
+    "result": "FAIL preserved before installation",
+    "observation": "CLI invoked git clone --branch <rawSHA>; Git rejected it because no remote branch has that name. No product installed.",
+    "fix": "Use existing public fixture branch; fail closed on SHA or clean-tree/content mismatch before install. No tag/main/product/fixture changes."
+  }
 }

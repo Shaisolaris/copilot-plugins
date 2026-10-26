@@ -21,6 +21,7 @@ CANDIDATE = '565ddab4370f6644d8c67978bad8615ad8e7f156'
 PRODUCT = '0ce43cd9a550a033a40b4e1f429a6c3c138802c2'
 CORE = 'c7c9b395795f488dd3c48122ff916970438b67e6'
 FIXTURE = 'b6fbf9862aa29fde57793c04894de5caa43a635a'
+FIXTURE_BRANCH = 'codex/solaris-068-catalog-fixture'
 CATALOG = '.github/plugin/marketplace.json'
 CLI_SHA = '506d032ae26882d40f1396e9b2080c6d9c3a5d5392404f9ef13eb7540efb55ec'
 
@@ -135,7 +136,17 @@ def main():
         assert result.returncode == 0,label+': '+result.stderr[-3000:]
         return result.stdout
     assert run('version',['--version']).startswith('GitHub Copilot CLI 1.0.102.')
-    run('add-marketplace',['plugin','marketplace','add','Shaisolaris/copilot-plugins#'+FIXTURE])
+    run('add-marketplace',['plugin','marketplace','add','Shaisolaris/copilot-plugins#'+FIXTURE_BRANCH])
+    fixture_repos = [p.parent for p in config.rglob('.git') if p.is_dir() and
+                    (p.parent/CATALOG).is_file() and
+                    git(p.parent,'remote','get-url','origin').decode().strip() ==
+                    'https://github.com/Shaisolaris/copilot-plugins.git']
+    assert len(fixture_repos) == 1,fixture_repos
+    fixture_repo = fixture_repos[0]
+    assert git(fixture_repo,'rev-parse','HEAD').decode().strip() == FIXTURE,'Catalog branch drifted'
+    assert not git(fixture_repo,'status','--porcelain'),'Fetched catalog was modified'
+    assert (fixture_repo/CATALOG).read_bytes() == git(repo,'show',FIXTURE+':'+CATALOG)
+
     run('install',['plugin','install','solaris-dev-shop@solaris-catalog-qa'])
     listed = json.loads(run('installed',['plugin','list','--json']))
     owned_plugins = [row for row in listed if row['name'] == 'solaris-dev-shop']
@@ -163,7 +174,8 @@ def main():
               'host':'CopilotCLI1.0.102','matchingFilesAndModes':1980,'canonicalFiles':1201,
               'nativeWorkflows':62,'catalogRejectionControls':rejected,'actualHelperOutcomes':outcomes,
               'fixtureCatalogNameOnlyOverride':'solaris-catalog-qa',
-              'fixtureCatalogGitSHA':FIXTURE,'catalogTransport':'publicGitHub',
+              'fixtureCatalogGitSHA':FIXTURE,'catalogTransport':'publicGitHubBranchVerifiedAtExactSHA',
+              'fixtureBranch':FIXTURE_BRANCH,'fetchedFixtureSHA':FIXTURE,
               'officialCatalogDefault':False,'originalAwesomeRejectionOverturned':False,'forceFlagUsed':False,
               'modelCommandsIssued':0,'modelUsageMetered':False,'ownerProfileAccess':False,
               'upstreamApplicationSubmitted':False,'publicMarketplaceAccepted':False,'pass':True}
