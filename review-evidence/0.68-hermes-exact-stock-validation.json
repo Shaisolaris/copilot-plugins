@@ -1,0 +1,79 @@
+{
+  "atUTC": "2026-10-26T22:29:33.065661+00:00",
+  "scopeApproval": "Muse exact-input scope in evidence-acceptances-and-hermes-exact-input-scope.md, retained original locally",
+  "rootExecutedReceipt": {
+    "atUTC": "2026-10-26T22:28:55.278382+00:00",
+    "source": "0ce43cd9a550a033a40b4e1f429a6c3c138802c2",
+    "sourcePath": "plugin",
+    "tree": "566e50499d05ac7a62df35a1b6e3764dfd861b97",
+    "stock": "fa58877a9ab4315aac4dd820c4122499bbd3234c",
+    "stockUpstream": "edfa1c2a135532a8b64f7825c0ac0af6cfe73d4d",
+    "regularFiles": 1273,
+    "canonicalFiles": 1201,
+    "workflows": 62,
+    "exitCode": 0,
+    "stdoutSHA256": "0f92c866a2f74de26ec36e01b1883d00f5521d46e38ad0ce1eedba8d5448bab2",
+    "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "networkCommands": 0,
+    "dependencyInstall": false,
+    "ownerProfileAccess": false,
+    "liveInstall": false,
+    "providerAdmission": false,
+    "fullSourceUnchangedAfterValidation": true,
+    "pass": true
+  },
+  "stockNormalReport": {
+    "ok": true,
+    "checks": [
+      {
+        "name": "portable manifest",
+        "ok": true,
+        "detail": "plugin.json parses (Agent Plugins v1)"
+      },
+      {
+        "name": "manifest fields",
+        "ok": true,
+        "detail": "name present"
+      },
+      {
+        "name": "config schema",
+        "ok": true,
+        "detail": "not declared"
+      },
+      {
+        "name": "security scan",
+        "ok": true,
+        "detail": "safe"
+      }
+    ],
+    "warnings": [],
+    "isolation": {
+      "verdict": "portable",
+      "host_ready": true,
+      "reasons": [],
+      "notes": [],
+      "ctx_methods": []
+    }
+  },
+  "schemaResult": {
+    "ok": true,
+    "files": [
+      {
+        "path": "plugin-catalog/solaris-dev-shop.yaml",
+        "ok": true,
+        "errors": [],
+        "warnings": []
+      }
+    ]
+  },
+  "evidenceProvenance": "Root-executed stock command and output; private raw output retained with hashes in receipt. Reviewer can verify public input source/tree and unchanged stock command, not independently executed logs.",
+  "supersedesInputReuseInference": true,
+  "publicCatalogAccepted": false,
+  "upstreamCatalogApplicationSent": false,
+  "releaseAllowed": false,
+  "limits": [
+    "Stock local static/manifest validation is not provider public admission or actual normal marketplace installation.",
+    "No capability probe applies to this portable no-register package; do not invent executed API tool tests.",
+    "ClawHub retained0.68 semantic scan/admission still incomplete; all release/provider-upload holds remain."
+  ]
+}

@@ -4,6 +4,7 @@
 Only new private HOME/config/fixture directories are written. A fixture catalog
 name avoids replacing the client's real default catalog. Nothing is submitted.
 """
+import utils.session
 import argparse
 import copy
 import hashlib
