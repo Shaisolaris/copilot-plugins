@@ -20,6 +20,7 @@ BASE = 'b0216dbc8f6f7ac1cfce85e925dfa5d5e423876a'
 CANDIDATE = '565ddab4370f6644d8c67978bad8615ad8e7f156'
 PRODUCT = '0ce43cd9a550a033a40b4e1f429a6c3c138802c2'
 CORE = 'c7c9b395795f488dd3c48122ff916970438b67e6'
+FIXTURE = 'b6fbf9862aa29fde57793c04894de5caa43a635a'
 CATALOG = '.github/plugin/marketplace.json'
 CLI_SHA = '506d032ae26882d40f1396e9b2080c6d9c3a5d5392404f9ef13eb7540efb55ec'
 
@@ -66,34 +67,17 @@ def controls(before,after):
 def archive(root,ref):
     return tarfile.open(fileobj=io.BytesIO(git(root,'archive',ref)))
 
-def extract_catalog(repo,destination):
-    destination.mkdir()
-    with archive(repo,CANDIDATE) as source:
-        entries = source.getmembers()
-        for item in entries:
-            assert not Path(item.name).is_absolute() and '..' not in Path(item.name).parts
-            target = destination/item.name
-            if item.isdir():
-                target.mkdir(parents=True,exist_ok=True)
-            elif item.isfile():
-                target.parent.mkdir(parents=True,exist_ok=True)
-                target.write_bytes(source.extractfile(item).read())
-                target.chmod(0o755 if item.mode & 0o111 else 0o644)
-            else:
-                assert item.issym() and item.name == '.claude-plugin/marketplace.json'
-                assert item.linkname == '../.github/plugin/marketplace.json'
-        for item in entries:
-            if item.issym():
-                target = destination/item.name
-                assert (target.parent/item.linkname).resolve().is_relative_to(destination)
-                target.parent.mkdir(parents=True,exist_ok=True)
-                target.symlink_to(item.linkname)
-    path = destination/CATALOG
-    manifest = json.loads(path.read_text())
-    assert manifest['name'] == 'copilot-plugins'
-    manifest['name'] = 'solaris-catalog-qa'
-    path.write_text(json.dumps(manifest,indent=2)+'\n')
-    return destination
+def check_public_fixture(repo, candidate):
+    changed = git(repo,'diff','--name-only',CANDIDATE,FIXTURE).decode().splitlines()
+    assert changed == [CATALOG], changed
+    manifest = json.loads(git(repo,'show',FIXTURE+':'+CATALOG))
+    assert manifest['name'] == 'solaris-catalog-qa'
+    manifest['name'] = candidate['name']
+    assert manifest == candidate, 'Public fixture changes more than catalog name'
+    assert git(repo,'show',FIXTURE+':.claude-plugin/marketplace.json') == b'../.github/plugin/marketplace.json'
+    mode = git(repo,'ls-tree',FIXTURE,'.claude-plugin/marketplace.json').decode().split()[0]
+    assert mode == '120000', mode
+
 
 def product_inventory(native):
     rows = {}
@@ -128,6 +112,7 @@ def main():
     before = json.loads(git(repo,'show',BASE+':'+CATALOG))
     after = json.loads(git(repo,'show',CANDIDATE+':'+CATALOG))
     entry = check_catalog(before,after)
+    check_public_fixture(repo,after)
     rejected = controls(before,after)
     assert git(repo,'diff','--name-only',BASE,CANDIDATE).decode().splitlines() == [CATALOG,'README.md']
     expected = product_inventory(native)
@@ -150,10 +135,13 @@ def main():
         assert result.returncode == 0,label+': '+result.stderr[-3000:]
         return result.stdout
     assert run('version',['--version']).startswith('GitHub Copilot CLI 1.0.102.')
-    fixture = extract_catalog(repo,work/'catalog-fixture')
-    run('add-marketplace',['plugin','marketplace','add',fixture])
+    run('add-marketplace',['plugin','marketplace','add','Shaisolaris/copilot-plugins#'+FIXTURE])
     run('install',['plugin','install','solaris-dev-shop@solaris-catalog-qa'])
-    run('installed',['plugin','list','--json'])
+    listed = json.loads(run('installed',['plugin','list','--json']))
+    owned_plugins = [row for row in listed if row['name'] == 'solaris-dev-shop']
+    assert len(owned_plugins) == 1, owned_plugins
+    assert owned_plugins[0]['marketplace'] == 'solaris-catalog-qa' and owned_plugins[0]['version'] == '0.68.0'
+    assert owned_plugins[0]['enabled'] is True, owned_plugins
     installed = [p.parent.parent for p in (config/'installed-plugins').rglob('native/skills.json')
                  if (p.parent.parent/'COPILOT-LAYOUT.json').is_file()]
     assert len(installed) == 1,installed
@@ -174,7 +162,9 @@ def main():
     report = {'candidateCatalog':CANDIDATE,'source':entry['source'],'version':'0.68.0',
               'host':'CopilotCLI1.0.102','matchingFilesAndModes':1980,'canonicalFiles':1201,
               'nativeWorkflows':62,'catalogRejectionControls':rejected,'actualHelperOutcomes':outcomes,
-              'fixtureCatalogNameOnlyOverride':'solaris-catalog-qa','forceFlagUsed':False,
+              'fixtureCatalogNameOnlyOverride':'solaris-catalog-qa',
+              'fixtureCatalogGitSHA':FIXTURE,'catalogTransport':'publicGitHub',
+              'officialCatalogDefault':False,'originalAwesomeRejectionOverturned':False,'forceFlagUsed':False,
               'modelCommandsIssued':0,'modelUsageMetered':False,'ownerProfileAccess':False,
               'upstreamApplicationSubmitted':False,'publicMarketplaceAccepted':False,'pass':True}
     (work/'RESULT.json').write_text(json.dumps(report,indent=2)+'\n')

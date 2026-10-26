@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "purpose": "Read-only independent source/test-scope review for a complete MP08 entry in the separately documented default github/copilot-plugins catalog. No rejection is concealed or acceptance claimed.",
+  "purpose": "Read-only independent source/test-scope delta review for full MP08 entry in github/copilot-plugins, an official but currently NON-DEFAULT catalog. Original awesome-copilot rejection remains unresolved.",
   "baseline": "b0216dbc8f6f7ac1cfce85e925dfa5d5e423876a",
   "catalogCandidate": "565ddab4370f6644d8c67978bad8615ad8e7f156",
   "product": "0ce43cd9a550a033a40b4e1f429a6c3c138802c2",
@@ -8,7 +8,7 @@
   "core": "c7c9b395795f488dd3c48122ff916970438b67e6",
   "runner": {
     "path": "review-tools/verify_full_catalog_068.py",
-    "sha256": "86216b2ae2b031c7eab636125c94f454e0492c304c82eb186da3cf37a0d6b9ba"
+    "sha256": "f0a5b621817e700b357c0c425cd54a557c096aa49ec12ca3a96129df60710c8d"
   },
   "unchangedImportedHelper": {
     "path": "tools/verify_copilot_layout.py",
@@ -25,13 +25,19 @@
     "C02 rejectduplicateproductentry",
     "C03 rejectunpinnedsource",
     "C04 rejectchangedexistingcatalogentry",
-    "C05 normalnativeCLIregisterprivatecatalogfixtureandinstallfullpublicGitref",
+    "C05 normalnativeCLIregisterexactpublicGitHubfixtureSHAandinstallfullproduct0ce;pluginlistmustshowexactenabled0.68SolarisQAentry",
     "C06 installed1980files/modesmatchexactapprovedGitarchive/all1201canonicalhashes",
     "C07 all62uniquenativeworkflowsdiscovered",
     "C08 unchanged62context/boundedcoordinator/actual2rowSQLiterestoreandneighborpreservation smoke",
     "C09 productbytesstillunchangedaftermanagement/helpercommands"
   ],
-  "fixture": "Full exact candidate Git archive with stock internal .claude-plugin symlink retained; ONLY catalog name changed to solaris-catalog-qa to avoid replacing the real default registration. This is a private resolution test, not public listing acceptance.",
+  "fixture": {
+    "repo": "Shaisolaris/copilot-plugins",
+    "sha": "b6fbf9862aa29fde57793c04894de5caa43a635a",
+    "onlyDifference": "Catalog name solaris-catalog-qa; candidate source and all stock files/modes/symlink remain unchanged",
+    "transport": "Documented normal plugin marketplace add owner/repo#SHA",
+    "isUpstreamMarketplaceListing": false
+  },
   "accessBoundary": {
     "read": [
       "Explicitpubliccatalog/product Git objects",
@@ -41,7 +47,7 @@
       "NEWownedworkdir with freshHOME/COPILOT_HOME/config/cache/fixture/logs/SQLitefixtures only"
     ],
     "network": [
-      "PublicGitHub source checkout at pinned productSHA and normalpubliccatalogmetadata the officialmanagementclientfetches; no credentials passed"
+      "Exact public owned catalog fixture b6fbf9862aa29fde57793c04894de5caa43a635a and product0ce GitHub checkout; normal public catalog metadata only; no credentials"
     ],
     "forbidden": [
       "Ownerprofiles/keys/accounts",
@@ -61,8 +67,15 @@
     "productFiles": 1980,
     "newCapabilitiesClaimed": 0
   },
-  "upstreamRejection": "github/awesome-copilot5393 remains rejected. Any alternate default-catalog inquiry/application must disclose that history and request a genuine independent fit decision, not repeat the rejected submission unchanged.",
+  "upstreamRejection": "github/awesome-copilot5393 remains rejected. Any alternate non-default official-catalog inquiry/application must disclose that history and request a genuine independent fit decision, not repeat the rejected submission unchanged.",
   "releaseHold": "Shared ClawHub requiredscan/admission and final rollout gates remain. No marketplace application/listing/approval claimed.",
-  "stage": "AWAITING_INDEPENDENT_SOURCE_TEST_SCOPE_REVIEW",
-  "priorUnreviewedCandidate": "bcd0cf9ebd45e2fdca5adb8a582e5e6f3979bc5a (existingUnicode formatting corrected before review; values unchanged)"
+  "stage": "AWAITING_INDEPENDENT_SOURCE_TEST_SCOPE_DELTA_REVIEW",
+  "priorUnreviewedCandidate": "bcd0cf9ebd45e2fdca5adb8a582e5e6f3979bc5a (existingUnicode formatting corrected before review; values unchanged)",
+  "priorFailure": {
+    "run": "../copilot-catalog-qa-068-run1",
+    "result": "FAIL preserved",
+    "observation": "Local-directory catalog install printed 62 skills, but plugin list omitted Solaris and skill list exposed no Solaris workflows. Client log pruned cached external entry to live local mode. Product cache HEAD did match0ce; source SHA was honored.",
+    "fix": "Use documented public GitHub catalog fixture transport. Preserve all byte/mode/discovery/recovery assertions; no cache-as-install or force override."
+  },
+  "officialCatalogDefault": false
 }
