@@ -17,7 +17,7 @@ import sys
 import tarfile
 
 BASE = 'b0216dbc8f6f7ac1cfce85e925dfa5d5e423876a'
-CANDIDATE = 'bcd0cf9ebd45e2fdca5adb8a582e5e6f3979bc5a'
+CANDIDATE = '565ddab4370f6644d8c67978bad8615ad8e7f156'
 PRODUCT = '0ce43cd9a550a033a40b4e1f429a6c3c138802c2'
 CORE = 'c7c9b395795f488dd3c48122ff916970438b67e6'
 CATALOG = '.github/plugin/marketplace.json'

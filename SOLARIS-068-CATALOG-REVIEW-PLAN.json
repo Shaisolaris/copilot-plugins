@@ -2,13 +2,13 @@
   "schema": 1,
   "purpose": "Read-only independent source/test-scope review for a complete MP08 entry in the separately documented default github/copilot-plugins catalog. No rejection is concealed or acceptance claimed.",
   "baseline": "b0216dbc8f6f7ac1cfce85e925dfa5d5e423876a",
-  "catalogCandidate": "bcd0cf9ebd45e2fdca5adb8a582e5e6f3979bc5a",
+  "catalogCandidate": "565ddab4370f6644d8c67978bad8615ad8e7f156",
   "product": "0ce43cd9a550a033a40b4e1f429a6c3c138802c2",
   "productPath": "copilot/plugin",
   "core": "c7c9b395795f488dd3c48122ff916970438b67e6",
   "runner": {
     "path": "review-tools/verify_full_catalog_068.py",
-    "sha256": "1cee8b5a61989a4afc7c3ce6b99b959720ad250dc8db6a57edf6163e2fe7bd04"
+    "sha256": "86216b2ae2b031c7eab636125c94f454e0492c304c82eb186da3cf37a0d6b9ba"
   },
   "unchangedImportedHelper": {
     "path": "tools/verify_copilot_layout.py",
@@ -63,5 +63,6 @@
   },
   "upstreamRejection": "github/awesome-copilot5393 remains rejected. Any alternate default-catalog inquiry/application must disclose that history and request a genuine independent fit decision, not repeat the rejected submission unchanged.",
   "releaseHold": "Shared ClawHub requiredscan/admission and final rollout gates remain. No marketplace application/listing/approval claimed.",
-  "stage": "AWAITING_INDEPENDENT_SOURCE_TEST_SCOPE_REVIEW"
+  "stage": "AWAITING_INDEPENDENT_SOURCE_TEST_SCOPE_REVIEW",
+  "priorUnreviewedCandidate": "bcd0cf9ebd45e2fdca5adb8a582e5e6f3979bc5a (existingUnicode formatting corrected before review; values unchanged)"
 }
