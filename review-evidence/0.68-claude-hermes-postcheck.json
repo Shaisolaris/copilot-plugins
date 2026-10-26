@@ -1,0 +1,158 @@
+{
+  "atUTC": "2026-10-26T22:26:25.522626+00:00",
+  "claude": {
+    "source": "fe473e91134c15d7f33bc57ce481fbe5080eeeab",
+    "CI": {
+      "id": 40412115689,
+      "html_url": "https://github.com/Shaisolaris/solaris-dev-shop-claude/actions/runs/40412115689",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "fe473e91134c15d7f33bc57ce481fbe5080eeeab",
+      "created_at": "2026-10-26T22:23:58Z",
+      "updated_at": "2026-10-26T22:24:12Z"
+    },
+    "jobs": [
+      {
+        "id": 121885170278,
+        "name": "exact-package-and-caller",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-26T22:24:02Z",
+            "completed_at": "2026-10-26T22:24:02Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-26T22:24:02Z",
+            "completed_at": "2026-10-26T22:24:03Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-26T22:24:03Z",
+            "completed_at": "2026-10-26T22:24:06Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-26T22:24:06Z",
+            "completed_at": "2026-10-26T22:24:06Z"
+          },
+          {
+            "name": "Whole-source bytes, modes, roster and bounded metadata",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-26T22:24:06Z",
+            "completed_at": "2026-10-26T22:24:06Z"
+          },
+          {
+            "name": "Actual isolated coordinator and WordPress data-boundary tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-26T22:24:06Z",
+            "completed_at": "2026-10-26T22:24:08Z"
+          },
+          {
+            "name": "Offline installation and explicit setup boundaries",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-26T22:24:08Z",
+            "completed_at": "2026-10-26T22:24:09Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-26T22:24:09Z",
+            "completed_at": "2026-10-26T22:24:09Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-26T22:24:09Z",
+            "completed_at": "2026-10-26T22:24:09Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-26T22:24:09Z",
+            "completed_at": "2026-10-26T22:24:10Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-26T22:24:10Z",
+            "completed_at": "2026-10-26T22:24:10Z"
+          }
+        ]
+      }
+    ],
+    "privatePreparedArchive": {
+      "atUTC": "2026-10-26T22:25:05.730563+00:00",
+      "source": "fe473e91134c15d7f33bc57ce481fbe5080eeeab",
+      "priorSource": "418e30c9530044196e5fdfcb8988f6bcb84879a8",
+      "sourceCI": 40412115689,
+      "archive": "solaris-dev-shop-claude-0.68.0.tgz",
+      "sha256": "23708eea3b9fafbbf2ac521c56b0e43863e3b12f53a1baa9dfaed1f75e23a060",
+      "bytes": 5493808,
+      "matchingFilesAndModes": 1275,
+      "canonicalFilesUnchanged": 1201,
+      "workflowsUnchanged": 62,
+      "onlyChangedPath": "README.md",
+      "priorArchiveSHA256": "2a896fce7a24a8a6c1641bc2b216545bdb30e377813095a6e070a4b82a1a2cfd",
+      "rootArchiveEquivalenceCheck": true,
+      "published": false,
+      "releaseAllowed": false
+    },
+    "limits": "Only README documentation changed. Manifest/runtime/local strict CLI input acceptance reused for unchanged inputs; directory portal has NOT validated this or any candidate. Policy permission, two reviewer holds and paid portal remain unresolved."
+  },
+  "hermes": {
+    "catalogCandidate": "fa58877a9ab4315aac4dd820c4122499bbd3234c",
+    "schemaResult": {
+      "ok": true,
+      "files": [
+        {
+          "path": "plugin-catalog/solaris-dev-shop.yaml",
+          "ok": true,
+          "errors": [],
+          "warnings": []
+        }
+      ]
+    },
+    "schemaExecution": {
+      "atUTC": "2026-10-26T22:23:54.369342+00:00",
+      "candidate": "fa58877a9ab4315aac4dd820c4122499bbd3234c",
+      "validatorSHA256": "44b0d33c9b86535dda3b5bde20cc06b33991ec926e293979c670105ed6dc5b5b",
+      "exitCode": 0,
+      "stdoutSHA256": "37ede876c22fc07ddcdcd2fb67381b887428a93884ee137554bb60c3e331f595",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "networkCommands": 0,
+      "ownerProfileAccess": false,
+      "liveInstall": false,
+      "publicCatalogAccepted": false
+    },
+    "normalFullStockValidationAtNewCatalogInput": "A fresh bounded test is requested separately; do not infer current exact tree approval solely from same canonical core."
+  },
+  "evidenceProvenance": "Root executed local commands; schema and private archive output are Root-brokered values. CI metadata is independently available at the linked exact public run. No product code, upstream application, provider upload or final release change."
+}
